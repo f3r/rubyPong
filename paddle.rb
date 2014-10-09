@@ -1,6 +1,7 @@
 class Paddle
   WIDTH  = 13
   HEIGHT = 100
+  SPEED = 6
 
   attr_reader :side, :y
 
@@ -33,6 +34,6 @@ class Paddle
     )
   end
 
-  def up!;   @y -= 4; end
-  def down!; @y += 4; end
+  def up!;   @y -= SPEED; end
+  def down!; @y += SPEED; end
 end
