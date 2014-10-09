@@ -1,5 +1,7 @@
 require "hasu"
 
+Hasu.load "ball.rb"
+
 class Pong < Hasu::Window
   
   WIDTH       = 768
@@ -9,5 +11,13 @@ class Pong < Hasu::Window
     super(WIDTH, HEIGHT, false) # full-screen = false
   end
 
+  def reset
+    @ball = Ball.new
+  end
+
+  def draw
+    @ball.draw(self)
+  end
 end
+
 Pong.run
