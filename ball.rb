@@ -8,8 +8,10 @@ class Ball
     @x = Pong::WIDTH/2
     @y = Pong::HEIGHT/2
 
-    @angle = 135  # 135 Degrees = down and to the right
     @speed = 4    # Pixels per frame
+
+    @angle = rand(120) + 30
+    @angle *= -1 if rand > 0.5
   end
 
   # Coordinates to define the area of the ball (as a square)
