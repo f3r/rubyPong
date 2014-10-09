@@ -38,6 +38,12 @@ class Pong < Hasu::Window
   def update
     @ball.move!
 
+    @left_paddle.up!   if button_down?(Gosu::KbW)  # Keyboard key: W
+    @left_paddle.down! if button_down?(Gosu::KbS)  # Keyboard key: S
+
+    @right_paddle.up!   if button_down?(Gosu::KbUp)   # Keyboard key: Up
+    @right_paddle.down! if button_down?(Gosu::KbDown) # Keyboard key: Down
+
     if @ball.off_left?
       @left_score += 1
       @ball = Ball.new
