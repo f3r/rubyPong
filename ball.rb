@@ -33,10 +33,17 @@ class Ball
   end
 
   def move!
-    @x += Gosu.offset_x(angle, speed)
-    @y += Gosu.offset_y(angle, speed)
+    dx = Gosu.offset_x(angle, speed) # http://www.libgosu.org/rdoc/Gosu.html#offset_x-class_method
+    dy = Gosu.offset_y(angle, speed) # http://www.libgosu.org/rdoc/Gosu.html#offset_y-class_method
 
-    # http://www.libgosu.org/rdoc/Gosu.html#offset_x-class_method
-    # http://www.libgosu.org/rdoc/Gosu.html#offset_y-class_method
+    @x += dx
+    @y += dy
+
+    if @y < 0
+      @y = 0
+      @angle = Gosu.angle(0, 0, dx, -dy)
+
+      # http://www.libgosu.org/rdoc/Gosu.html#angle-class_method
+    end
   end
 end
