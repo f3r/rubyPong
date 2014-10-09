@@ -2,10 +2,14 @@ class Ball
   SIZE = 16
 
   attr_reader :x, :y  # coordinates of the center of the ball
+  attr_reader :angle, :speed
 
   def initialize
     @x = Pong::WIDTH/2
     @y = Pong::HEIGHT/2
+
+    @angle = 45   # 45 Degrees = up and to the right
+    @speed = 4    # Pixels per frame
   end
 
   # Coordinates to define the area of the ball (as a square)
@@ -26,5 +30,13 @@ class Ball
 
     # http://www.libgosu.org/rdoc/Gosu/Color.html
     # http://www.libgosu.org/rdoc/Gosu/Window.html#draw_quad-instance_method
+  end
+
+  def move!
+    @x += Gosu.offset_x(angle, speed)
+    @y += Gosu.offset_y(angle, speed)
+
+    # http://www.libgosu.org/rdoc/Gosu.html#offset_x-class_method
+    # http://www.libgosu.org/rdoc/Gosu.html#offset_y-class_method
   end
 end
