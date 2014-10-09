@@ -8,7 +8,7 @@ class Ball
     @x = Pong::WIDTH/2
     @y = Pong::HEIGHT/2
 
-    @angle = 45   # 45 Degrees = up and to the right
+    @angle = 135  # 135 Degrees = down and to the right
     @speed = 4    # Pixels per frame
   end
 
@@ -42,8 +42,11 @@ class Ball
     if @y < 0
       @y = 0
       @angle = Gosu.angle(0, 0, dx, -dy)
+    end
 
-      # http://www.libgosu.org/rdoc/Gosu.html#angle-class_method
+    if @y > Pong::HEIGHT
+      @y = Pong::HEIGHT
+      @angle = Gosu.angle(0, 0, dx, -dy)
     end
   end
 end
