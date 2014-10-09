@@ -32,21 +32,26 @@ class Ball
     # http://www.libgosu.org/rdoc/Gosu/Window.html#draw_quad-instance_method
   end
 
-  def move!
-    dx = Gosu.offset_x(angle, speed) # http://www.libgosu.org/rdoc/Gosu.html#offset_x-class_method
-    dy = Gosu.offset_y(angle, speed) # http://www.libgosu.org/rdoc/Gosu.html#offset_y-class_method
+  def dx; Gosu.offset_x(angle, speed); end
+  def dy; Gosu.offset_y(angle, speed); end
 
+  def move!
     @x += dx
     @y += dy
 
     if @y < 0
       @y = 0
-      @angle = Gosu.angle(0, 0, dx, -dy)
+      bounce_off_edge!
     end
 
     if @y > Pong::HEIGHT
       @y = Pong::HEIGHT
-      @angle = Gosu.angle(0, 0, dx, -dy)
+      bounce_off_edge!
     end
   end
+
+  def bounce_off_edge!
+    @angle = Gosu.angle(0, 0, dx, -dy)
+  end
+
 end
