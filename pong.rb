@@ -40,6 +40,14 @@ class Pong < Hasu::Window
 
     move_paddle_if_keypress
     check_off_bounces
+
+    if @ball.intersect?(@left_paddle)
+      @ball.bounce_off_paddle!(@left_paddle)
+    end
+
+    if @ball.intersect?(@right_paddle)
+      @ball.bounce_off_paddle!(@right_paddle)
+    end
   end
 
   def move_paddle_if_keypress

@@ -13,14 +13,11 @@ class Paddle
   # x1, y1 <----> x2,y2
   # defining the coordinates fot the area to draw the paddle
   def x1
-    case side
-    when :left;  0
-    when :right; Pong::WIDTH - WIDTH
-    end
+    {left: 0, right:  Pong::WIDTH - WIDTH}[side]
   end
 
-  def y1;  y - HEIGHT/2 ; end
-  def x2; x1 +  WIDTH   ; end # width of rectangle is the width of the paddle
+  def y1;  y - HEIGHT/2 ; end # Initial position
+  def x2; x1 +  WIDTH   ; end # rectangle width = paddle width of
   def y2; y1 +  HEIGHT  ; end # height of rectangle is the width of the paddle
 
   def draw(window)
