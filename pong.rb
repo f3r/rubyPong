@@ -20,7 +20,7 @@ class Pong < Hasu::Window
 
     @font = Gosu::Font.new(self, "Arial", 30)
 
-    @left_paddle  = Paddle.new(:left)
+    @left_paddle  = Paddle.new(:left, true)
     @right_paddle = Paddle.new(:right)
 
   end
@@ -51,10 +51,19 @@ class Pong < Hasu::Window
   end
 
   def move_paddle_if_keypress
-    @left_paddle.up!    if button_down?(Gosu::KbW)    # Keyboard key: W
-    @left_paddle.down!  if button_down?(Gosu::KbS)    # Keyboard key: S
-    @right_paddle.up!   if button_down?(Gosu::KbUp)   # Keyboard key: Up
-    @right_paddle.down! if button_down?(Gosu::KbDown) # Keyboard key: Down
+    if @left_paddle.ai
+      @left_paddle.ai_move!(@ball)
+    else
+      @left_paddle.up!    if button_down?(Gosu::KbW)    # Keyboard key: W
+      @left_paddle.down!  if button_down?(Gosu::KbS)    # Keyboard key: S
+    end
+
+    if @right_paddle.ai
+      @right_paddle.ai_move!(@ball)
+    else
+      @right_paddle.up!   if button_down?(Gosu::KbUp)   # Keyboard key: Up
+      @right_paddle.down! if button_down?(Gosu::KbDown) # Keyboard key: Down
+    end
   end
 
   def check_off_bounces

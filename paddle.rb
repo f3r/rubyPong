@@ -1,13 +1,19 @@
 class Paddle
   WIDTH  = 13
   HEIGHT = 100
-  SPEED = 6
 
-  attr_reader :side, :y
+  attr_reader :side, :y, :ai
 
-  def initialize(side)
+  def initialize(side, ai=false)
+    @ai = ai
     @side = side
     @y = Pong::HEIGHT/2
+    @speed = 6
+  end
+
+  def ai_move!(ball)
+    up!    if y >  ball.y
+    down!  if y <= ball.y
   end
 
   # x1, y1 <----> x2,y2
@@ -32,7 +38,7 @@ class Paddle
   end
 
   def up!
-    @y -= SPEED
+    @y -= @speed
 
     if y1 < 0
       @y = HEIGHT/2
@@ -40,7 +46,7 @@ class Paddle
   end
 
   def down!
-    @y += SPEED
+    @y += @speed
 
     if y2 > Pong::HEIGHT
       @y = Pong::HEIGHT - HEIGHT/2
