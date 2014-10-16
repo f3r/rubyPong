@@ -79,10 +79,7 @@ class Pong < Hasu::Window
   end
 
   def button_down(button)
-    case button
-    when Gosu::KbEscape
-      close
-    end
+    close if button == Gosu::KbEscape
   end
 end
 
